@@ -13,6 +13,7 @@ import {
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 import { ArrowUpRight, ArrowDownRight, Activity, DollarSign, Calendar } from 'lucide-react';
+import { basiqClient } from '../api/basiq';
 
 ChartJS.register(
     CategoryScale,
@@ -29,6 +30,30 @@ type Timeframe = '3days' | 'week' | 'month';
 
 const Dashboard: React.FC = () => {
     const [timeframe, setTimeframe] = useState<Timeframe>('month');
+    const [loading, setLoading] = useState(false);
+
+    const handleConnect = async () => {
+        setLoading(true);
+        try {
+            let userId = localStorage.getItem('basiqUserId');
+
+            if (!userId) {
+                // Create a new user for this session if not existing
+                // In a real app, you'd use the authenticated user's email
+                const user = await basiqClient.createUser(`user_${Date.now()}@example.com`, '+61400000000');
+                userId = user.id;
+                localStorage.setItem('basiqUserId', userId!);
+            }
+
+            const { links } = await basiqClient.getConnectLink(userId!);
+            window.location.href = links.public;
+        } catch (error) {
+            console.error('Connection failed:', error);
+            alert('Failed to initiate connection. Please check your API key and server status.');
+        } finally {
+            setLoading(false);
+        }
+    };
 
     // Multi-timeframe data sets
     const dataMap = {
@@ -140,7 +165,13 @@ const Dashboard: React.FC = () => {
                             <option value="month">This Month</option>
                         </select>
                     </div>
-                    <button className="btn-primary">Connect Bank</button>
+                    <button
+                        className="btn-primary"
+                        onClick={handleConnect}
+                        disabled={loading}
+                    >
+                        {loading ? 'Connecting...' : 'Connect Bank'}
+                    </button>
                 </div>
             </header>
 
