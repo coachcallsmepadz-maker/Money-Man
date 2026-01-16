@@ -177,7 +177,7 @@ const Dashboard: React.FC = () => {
 
             <div className="dashboard-grid">
                 {/* Top Row: Total Balance */}
-                <div className="card" style={{ gridColumn: 'span 3' }}>
+                <div className="card" style={{ gridColumn: 'span 2' }}>
                     <div className="card-title">Total Balance</div>
                     <div style={{ display: 'flex', alignItems: 'baseline', gap: '1rem' }}>
                         <div className="card-value">$24,560.00</div>
@@ -189,7 +189,7 @@ const Dashboard: React.FC = () => {
                 </div>
 
                 {/* Concept Group 1: Income */}
-                <div style={{ gridColumn: 'span 1.5', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                <div style={{ gridColumn: 'span 1', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                     <div className="card" style={{ height: 'fit-content' }}>
                         <div className="card-title">Monthly Income {timeframe === 'month' ? '' : `(${timeframe})`}</div>
                         <div className="card-value income">${timeframe === 'month' ? '8,400.00' : timeframe === 'week' ? '5,150.00' : '870.00'}</div>
@@ -198,16 +198,16 @@ const Dashboard: React.FC = () => {
                             <span>On track</span>
                         </div>
                     </div>
-                    <div className="card chart-container" style={{ gridColumn: 'span 1', flex: 1 }}>
+                    <div className="card chart-container" style={{ flex: 1 }}>
                         <div className="card-title">Income Trend</div>
-                        <div style={{ height: '300px', marginTop: '1rem' }}>
+                        <div style={{ height: '500px', marginTop: '1rem' }}>
                             <Line data={incomeData} options={chartOptions} />
                         </div>
                     </div>
                 </div>
 
                 {/* Concept Group 2: Expenses */}
-                <div style={{ gridColumn: 'span 1.5', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                <div style={{ gridColumn: 'span 1', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                     <div className="card" style={{ height: 'fit-content' }}>
                         <div className="card-title">Monthly Expenses {timeframe === 'month' ? '' : `(${timeframe})`}</div>
                         <div className="card-value expense">${timeframe === 'month' ? '3,240.00' : timeframe === 'week' ? '5,120.00' : '440.00'}</div>
@@ -216,9 +216,9 @@ const Dashboard: React.FC = () => {
                             <span>Trending</span>
                         </div>
                     </div>
-                    <div className="card chart-container" style={{ gridColumn: 'span 1', flex: 1 }}>
+                    <div className="card chart-container" style={{ flex: 1 }}>
                         <div className="card-title">Outcome Trend</div>
-                        <div style={{ height: '300px', marginTop: '1rem' }}>
+                        <div style={{ height: '500px', marginTop: '1rem' }}>
                             <Line data={spendingData} options={chartOptions} />
                         </div>
                     </div>
