@@ -20,7 +20,7 @@ app.use(express.json());
 app.post('/api/auth', async (req, res) => {
   try {
     const response = await axios.post(
-      'https://api.basiq.io/token',
+      'https://au-api.basiq.io/token',
       'scope=SERVER_ACCESS',
       {
         headers: {
@@ -42,7 +42,7 @@ app.post('/api/users', async (req, res) => {
   try {
     const { email, mobile } = req.body;
     const tokenResponse = await axios.post(
-      'https://api.basiq.io/token',
+      'https://au-api.basiq.io/token',
       'scope=SERVER_ACCESS',
       {
         headers: {
@@ -54,7 +54,7 @@ app.post('/api/users', async (req, res) => {
     );
 
     const response = await axios.post(
-      'https://api.basiq.io/users',
+      'https://au-api.basiq.io/users',
       { email, mobile },
       {
         headers: {
@@ -78,7 +78,7 @@ app.post('/api/connect-link', async (req, res) => {
 
     // 1. Get CLIENT_ACCESS token for the user
     const tokenResponse = await axios.post(
-      'https://api.basiq.io/token',
+      'https://au-api.basiq.io/token',
       `scope=CLIENT_ACCESS&userId=${userId}`,
       {
         headers: {
@@ -91,7 +91,7 @@ app.post('/api/connect-link', async (req, res) => {
 
     // 2. Generate the auth link
     const linkResponse = await axios.post(
-      `https://api.basiq.io/users/${userId}/auth_link`,
+      `https://au-api.basiq.io/users/${userId}/auth_link`,
       {},
       {
         headers: {
