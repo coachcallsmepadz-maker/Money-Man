@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const PROXY_URL = 'http://localhost:3001/api';
+const PROXY_URL = '/api';
 
 export const basiqClient = {
     getAuthToken: async () => {
